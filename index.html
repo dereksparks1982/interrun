@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Interrun v0.0.1</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="window" aria-label="Interrun bootstrap interface">
+    <header class="titlebar">
+      <div class="brand">INTERRUN</div>
+      <div class="status">LOCAL PROFILE · TRACKERS BLOCKED</div>
+    </header>
+    <div class="tabbar"><button class="tab active" type="button">New Tab</button><button class="new-tab" type="button">+</button></div>
+    <form class="navigation" id="navForm">
+      <button type="button" class="nav-button" id="backButton">←</button>
+      <button type="button" class="nav-button" id="forwardButton">→</button>
+      <button type="button" class="nav-button" id="reloadButton">↻</button>
+      <button type="button" class="nav-button" id="homeButton">⌂</button>
+      <input id="addressInput" class="address" autocomplete="off" spellcheck="false" placeholder="Search, web address, .onion, media file, or Interrun join link">
+      <button class="go-button" type="submit">Go</button>
+    </form>
+    <section class="workspace">
+      <nav class="sidebar">
+        <button type="button" data-tool="home" class="side-button active">Home</button>
+        <button type="button" data-tool="search" class="side-button">Search</button>
+        <button type="button" data-tool="messages" class="side-button">Messages</button>
+        <button type="button" data-tool="calls" class="side-button">Calls</button>
+        <button type="button" data-tool="media" class="side-button">Media</button>
+        <button type="button" data-tool="privacy" class="side-button">Privacy</button>
+      </nav>
+      <section class="content" id="content"></section>
+    </section>
+    <footer class="footer"><span>Interrun v0.0.1 bootstrap</span><span id="routeStatus">Ready · no cloud account required</span></footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

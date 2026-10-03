@@ -1,0 +1,9 @@
+build/
+out/
+dist/
+*.o
+*.a
+*.so
+*.swp
+.DS_Store
+.cache/
