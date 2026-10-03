@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Interrun
+Comment=Local-first web browser
+Exec=interrun %u
+Terminal=false
+Type=Application
+Categories=Network;WebBrowser;
+MimeType=x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/interrun;
+StartupWMClass=Interrun

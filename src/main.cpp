@@ -1,10 +1,23 @@
 #include "core/address_router.hpp"
 #include "privacy/privacy_policy.hpp"
-#include "privacy/privacy_receipt.hpp"
 #include "profile/profile_store.hpp"
+#include "ui/x11_shell.hpp"
 
 #include <iostream>
 #include <string>
+
+namespace {
+
+std::string join_arguments(int argc, char** argv, int start) {
+    std::string input;
+    for (int i = start; i < argc; ++i) {
+        if (!input.empty()) input += ' ';
+        input += argv[i];
+    }
+    return input;
+}
+
+} // namespace
 
 int main(int argc, char** argv) {
     interrun::ProfileStore profile;
@@ -20,24 +33,14 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    std::cout << "Interrun v0.0.1 bootstrap\n";
-    std::cout << "Local profile: " << profile.root() << '\n';
-
-    if (argc > 1) {
-        std::string input;
-        for (int i = 1; i < argc; ++i) {
-            if (!input.empty()) input += ' ';
-            input += argv[i];
-        }
-
-        const auto route = interrun::route_input(input);
-        std::cout << "Route: " << interrun::target_kind_name(route.kind) << '\n';
-        std::cout << "Target: " << route.normalized << '\n';
-    } else {
-        std::cout << "No target supplied. Browser/rendering integration is the next native milestone.\n";
+    if (argc > 1 && std::string(argv[1]) == "--route") {
+        const auto route = interrun::route_input(join_arguments(argc, argv, 2));
+        std::cout << interrun::target_kind_name(route.kind) << '\n'
+                  << route.normalized << '\n';
+        return 0;
     }
 
-    interrun::PrivacyReceipt receipt;
-    std::cout << '\n' << receipt.to_text() << '\n';
-    return 0;
+    const std::string initial = argc > 1 ? join_arguments(argc, argv, 1) : std::string{};
+    interrun::X11Shell shell(profile.root());
+    return shell.run(initial);
 }

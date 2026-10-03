@@ -10,21 +10,35 @@ Interrun is being assembled from code we already own or from open-source donor p
 - **Baresip + libre** for native audio/video calls and communications plumbing.
 - **Tor** as a planned first-class transport so normal addresses and onion addresses can share one address bar.
 
-## v0.0.1 bootstrap
+## v0.0.2 native preview
 
-The first build establishes the spine:
+This is the first build that opens as its **own Linux application window**. It does not require another browser to display Interrun's UI.
 
-- C++17 native core with warnings treated as errors.
-- Local profile creation with no online account.
-- Address routing for normal web, .onion, local files, media, searches, internal pages, and Interrun join links.
-- Privacy defaults with telemetry off, third-party cookies blocked, tracking storage blocked, and local data as the source of truth.
-- P2P-preferred and end-to-end-encrypted communications policy.
-- A simple browser-shell UI prototype for layout testing.
-- A donor map for the parts we are bringing forward from Nougat, DK Media, Netscape/Mozilla, and Baresip.
+Current native pieces:
 
-The web shell is deliberately plain. It is a UI harness, not a claim that the Netscape renderer, Tor, Baresip, or libVLC are already fully wired into the executable.
+- X11 application window and browser chrome
+- address bar and routing
+- Home, Search, Messages, Calls, Media, and Privacy views
+- locally generated `interrun://join/...` links
+- local profile creation with no online account
+- privacy defaults with telemetry off and third-party cookies blocked
+- normal web / `.onion` / local file / media / search / Interrun-link classification
+- C++17 build with warnings treated as errors
+- test suite and Debian packaging
 
-## Build
+This preview **does not yet render web pages**. The Netscape/Mozilla rendering path is the next browser-engine milestone. libVLC, Tor, Baresip/libre, and encrypted P2P signaling are also donor paths that are mapped but not yet linked into this executable.
+
+The old HTML/CSS/JS UI harness was removed from the application root so Interrun is not presented as a web app.
+
+## Build from source
+
+Ubuntu/Debian build requirements:
+
+```bash
+sudo apt install build-essential cmake libx11-dev
+```
+
+Build and run:
 
 ```bash
 cmake -S . -B build
@@ -33,14 +47,43 @@ ctest --test-dir build --output-on-failure
 ./build/interrun
 ```
 
-Route examples:
+You can also start it with an address or file:
 
 ```bash
 ./build/interrun https://example.com
 ./build/interrun examplehiddenservice.onion
 ./build/interrun movie.mkv
 ./build/interrun interrun://join/ABC123
-./build/interrun "search words"
+```
+
+Headless route check:
+
+```bash
+./build/interrun --route https://example.com
+```
+
+## Build a Debian package
+
+```bash
+./packaging/build-deb.sh
+```
+
+The package is written to:
+
+```text
+dist/interrun_0.0.2-1_<architecture>.deb
+```
+
+Install it with:
+
+```bash
+sudo apt install ./dist/interrun_0.0.2-1_amd64.deb
+```
+
+Then launch **Interrun** from the desktop application menu or run:
+
+```bash
+interrun
 ```
 
 ## Hard rules
@@ -61,7 +104,7 @@ See `docs/PROJECT_RULES.md`, `docs/ARCHITECTURE.md`, and `docs/DONOR_MAP.md`.
 
 ## Status
 
-**Version:** 0.0.1 bootstrap candidate  
+**Version:** 0.0.2 native preview  
 **Primary platform:** Linux / Ubuntu  
 **Branch model:** main only  
 **License:** GPL-3.0-or-later

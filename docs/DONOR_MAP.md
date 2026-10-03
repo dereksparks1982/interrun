@@ -83,11 +83,11 @@ It should become an internal Interrun subsystem rather than a separate user-faci
 
 Use as browser ancestry and historical source material. Do not blindly assume 1998 code can compile unchanged on a modern Linux toolchain. Preserve original licensing and source provenance while the usable browser/rendering path is mapped.
 
-## First integration order
+## Integration order
 
-1. Keep the v0.0.1 native core compiling cleanly.
-2. Bring DK Media/Nougat media code behind an Interrun media interface.
-3. Bring Nougat P2P/search/privacy pieces behind Interrun-owned interfaces.
-4. Bring Baresip/libre behind the communications interface.
-5. Map and modernize the browser/rendering path.
+1. Keep the native X11 shell and core compiling cleanly.
+2. Map and begin the Netscape/Mozilla browser/rendering path so Interrun can display actual pages itself.
+3. Bring DK Media/Nougat media code behind an Interrun media interface.
+4. Bring Nougat P2P/search/privacy pieces behind Interrun-owned interfaces.
+5. Bring Baresip/libre behind the communications interface.
 6. Wire Tor as an isolated transport for onion destinations.

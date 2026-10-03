@@ -10,6 +10,13 @@ Interrun is a **beanpole, not a tree**.
 - No pull-request branches for normal project work.
 - Approved work moves `main` forward in a straight line.
 
+## Application shape
+
+- Interrun must open as its own application.
+- Interrun must not require Firefox, Chrome, Edge, or another browser to display its own UI.
+- HTML/CSS/JS may be used later for internal pages only if Interrun itself renders them.
+- GitHub Pages is not the Interrun browser runtime.
+
 ## Change control
 
 - Scope first.
